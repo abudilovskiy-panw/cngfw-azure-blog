@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = ">=4.18.0" # New plan_id introduced at this version
+    }
+  }
+}
+
 provider "azurerm" {
     features {}
 }
@@ -76,6 +85,8 @@ resource "azurerm_palo_alto_next_generation_firewall_virtual_hub_local_rulestack
     virtual_hub_id               = azurerm_virtual_hub.vhub-westeurope.id
     network_virtual_appliance_id = azurerm_palo_alto_virtual_network_appliance.nva-westeurope.id
   }
+
+  plan_id = "panw-cngfw-payg"
 }
 
 resource "azurerm_palo_alto_next_generation_firewall_virtual_hub_panorama" "cngfw-eastus" {
@@ -88,6 +99,8 @@ resource "azurerm_palo_alto_next_generation_firewall_virtual_hub_panorama" "cngf
     virtual_hub_id               = azurerm_virtual_hub.vhub-eastus.id
     network_virtual_appliance_id = azurerm_palo_alto_virtual_network_appliance.nva-eastus.id
   }
+
+  plan_id = "panw-cngfw-payg"
 
   panorama_base64_config = var.panorama-string
 }
