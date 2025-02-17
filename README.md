@@ -153,6 +153,8 @@ resource "azurerm_palo_alto_next_generation_firewall_virtual_hub_local_rulestack
     virtual_hub_id               = azurerm_virtual_hub.vhub-eastus.id
     network_virtual_appliance_id = azurerm_palo_alto_virtual_network_appliance.nva-eastus.id
   }
+
+  plan_id = "panw-cngfw-payg"
 }
 ```
 Next, create a Cloud NGFW managed by Panorama. You are required to have a Panorama instance with the Azure plugin installed to generate the Registration String.
@@ -169,6 +171,7 @@ resource "azurerm_palo_alto_next_generation_firewall_virtual_hub_panorama" "cngf
     network_virtual_appliance_id = azurerm_palo_alto_virtual_network_appliance.nva-westeu.id
   }
 
+  plan_id = "panw-cngfw-payg"
   panorama_base64_config = var.panorama-string
 }
 ```
